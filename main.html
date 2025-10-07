@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modernity of History!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="splash-screen">
+        <h1>MODERNITY OF HISTORY</h1>
+        <p>Prepare yourself…</p>
+    </div>
+    <div class="quiz" style="display: none;">
+        <div class="ques">
+            <h2 id="attempts">Attempts</h2>
+            <h1 id="qno"><u>QUESTION</u></h1>
+            <h2 id="qnobody">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h2>
+        </div>
+        <div class="options">
+            <button id="option1" data-index="0">OPTION 1</button>
+            <button id="option2" data-index="1">OPTION 2</button>
+            <button id="option3" data-index="2">OPTION 3</button>
+            <button id="option4" data-index="3">OPTION 4</button>
+        </div>
+    </div>
+</body>
+<script>
+    function setCookie(name, value, days = 365) {
+        const d = new Date();
+        d.setTime(d.getTime() + days*24*60*60*1000);
+        const expires = "expires=" + d.toUTCString();
+        document.cookie = `${name}=${value};${expires};path=/`;
+    }
+    function getCookie(name) {
+        const cname = name + "=";
+        const decoded = decodeURIComponent(document.cookie);
+        const ca = decoded.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i].trim();
+            if (c.indexOf(cname) === 0) return c.substring(cname.length, c.length);
+        }
+        return null;
+    }
+        // Increment attempts when quiz starts
+    function incrementAttempts() {
+        let attempts = getCookie("quizAttempts");
+        if (!attempts) attempts = 0;
+        attempts = parseInt(attempts) + 1;
+        setCookie("quizAttempts", attempts, 365);
+        console.log("Quiz attempts:", attempts);
+    }
+
+    // Call this when user starts the quiz
+    incrementAttempts();
+    const attempts = getCookie("quizAttempts") || 0;
+
+    window.addEventListener("DOMContentLoaded", () => {
+    const splash = document.getElementById("splash-screen");
+    const quiz = document.querySelector(".quiz");
+
+    // Show splash for 2.5 seconds, then fade out
+    setTimeout(() => {
+        splash.style.opacity = 0;
+        setTimeout(() => {
+            splash.style.display = "none";
+            quiz.style.display = "block"; // show quiz
+            loadQuestion(0); // start quiz
+        }, 1000); // wait for fade out
+    }, 2500); // splash duration
+    });
+
+    var attempsDOM = document.getElementById('attempts');
+    var quesNo = document.getElementById('qno');
+    var quesBody = document.getElementById('qnobody');
+    var op1 = document.getElementById('option1');
+    var op2 = document.getElementById('option2');
+    var op3 = document.getElementById('option3');
+    var op4 = document.getElementById('option4');
+
+    var result = [0, 0, 0, 0, 0];
+    attempsDOM.innerText = `Attempt ${parseInt(attempts)}`;
+
+    const quizData = [
+    {
+        question: "Which torture device stretched victims’ limbs?",
+        options: ["The Rack", "The Wheel", "The Iron Maiden", "The Stocks"],
+        answer: "The Rack" 
+    },
+    {
+        question: "Which method used rats to torture prisoners?",
+        options: ["The Brazen Bull", "Rat Torture", "The Pendulum", "Scaphism"],
+        answer: "Rat Torture"
+    },
+    {
+        question: "Which device crushed the body with iron weights?",
+        options: ["Pressing Bench", "The Rack", "Thumbscrew", "Iron Maiden"],
+        answer: "Pressing Bench"
+    }
+    ];
+
+    var quesIdx = 0;
+
+    function loadQuestion(quesIdx){
+        quesNo.innerText = `QUESTION ${quesIdx + 1}`;
+        quesBody.innerText = quizData[quesIdx].question;
+
+        op1.innerText = quizData[quesIdx].options[0];
+        op2.innerText = quizData[quesIdx].options[1];
+        op3.innerText = quizData[quesIdx].options[2];
+        op4.innerText = quizData[quesIdx].options[3];
+
+        const buttons = document.querySelectorAll(".options button");
+        buttons.forEach(btn => {
+            btn.style.display = "block";  
+            btn.disabled = false;      
+            btn.style.backgroundColor = "";
+        });
+    }
+
+    loadQuestion(quesIdx);
+
+    const buttons = document.querySelectorAll(".options button");
+    buttons.forEach(button => {
+    button.addEventListener("click", function(e) {
+        const index = parseInt(this.dataset.index); 
+
+        const correctIndex = quizData[quesIdx].options.indexOf(quizData[quesIdx].answer);
+
+        if(index === correctIndex){
+            result.push(1);
+        } else {
+            result.push(0);
+        }
+
+        const splatter = document.createElement("div");
+        splatter.classList.add("blood-splatter");
+
+        splatter.style.left = `${e.clientX - 10}px`; 
+        splatter.style.top = `${e.clientY - 10}px`;
+        document.body.appendChild(splatter);
+
+        splatter.addEventListener("animationend", () => splatter.remove());
+
+        quesIdx += 1;
+
+        if(quesIdx < quizData.length) {
+            loadQuestion(quesIdx);
+        } else {
+            qno.innerText = "Quiz Completed!";
+            quesBody.innerText = `Your score: ${result.reduce((a,b)=>a+b,0)}/${quizData.length}`;
+
+            buttons.forEach(btn => btn.style.display = "none");
+            console.log("Quiz finished! Results:", result);
+        }
+    });
+});
+
+</script>
+</html>
