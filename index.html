@@ -8,8 +8,13 @@
 </head>
 <body>
     <div id="splash-screen">
+        <h2>History Exhibition 2K25</h2>
         <h1>MODERNITY OF HISTORY</h1>
         <p>Prepare yourself…</p>
+
+    <video autoplay muted loop playsinline id="fire-video">
+    <source src="fire.mp4" type="video/mp4">
+    </video>
     </div>
     <div class="quiz" style="display: none;">
         <div class="ques">
@@ -25,8 +30,6 @@
     </div>
 </body>
 <script>
-
-
 
     window.addEventListener("DOMContentLoaded", () => {
     const splash = document.getElementById("splash-screen");
@@ -52,23 +55,116 @@
 
         var result = [0, 0, 0, 0, 0];
 
-        const quizData = [
-        {
-            question: "Which torture device stretched victims’ limbs?",
-            options: ["The Rack", "The Wheel", "The Iron Maiden", "The Stocks"],
-            answer: "The Rack" 
-        },
-        {
-            question: "Which method used rats to torture prisoners?",
-            options: ["The Brazen Bull", "Rat Torture", "The Pendulum", "Scaphism"],
-            answer: "Rat Torture"
-        },
-        {
-            question: "Which device crushed the body with iron weights?",
-            options: ["Pressing Bench", "The Rack", "Thumbscrew", "Iron Maiden"],
-            answer: "Pressing Bench"
-        }
-        ];
+const quizData = [
+    // Guillotine
+    {
+        question: "Who proposed the idea of the guillotine as a more humane execution method?",
+        options: ["Dr. Joseph-Ignace Guillotin", "Maximilien Robespierre", "Charles-Henri Sanson", "Louis XVI"],
+        answer: "Dr. Joseph-Ignace Guillotin"
+    },
+    {
+        question: "In which country was the guillotine first officially used?",
+        options: ["England", "France", "Germany", "Italy"],
+        answer: "France"
+    },
+    {
+        question: "During which historical period did the guillotine become a symbol of revolutionary justice?",
+        options: ["Renaissance", "French Revolution", "Industrial Revolution", "Enlightenment"],
+        answer: "French Revolution"
+    },
+    {
+        question: "What was the main reason for introducing the guillotine?",
+        options: ["To execute faster", "To reduce suffering and make execution equal", "To entertain the public", "To punish nobles only"],
+        answer: "To reduce suffering and make execution equal"
+    },
+    {
+        question: "Who was the first person executed by the guillotine in France?",
+        options: ["Nicolas Jacques Pelletier", "Louis XVI", "Marie Antoinette", "Jean-Paul Marat"],
+        answer: "Nicolas Jacques Pelletier"
+    },
+    {
+        question: "Which French queen was executed by guillotine in 1793?",
+        options: ["Marie Antoinette", "Catherine de Medici", "Anne of Austria", "Josephine Bonaparte"],
+        answer: "Marie Antoinette"
+    },
+    {
+        question: "When did France officially abolish the use of the guillotine?",
+        options: ["1871", "1905", "1977", "1981"],
+        answer: "1981"
+    },
+    {
+        question: "Where was the last guillotine execution carried out in France?",
+        options: ["Lyon", "Marseille", "Paris", "Versailles"],
+        answer: "Marseille"
+    },
+    {
+        question: "What mechanical principle made the guillotine effective?",
+        options: ["Pulley and lever system", "Gravity-driven blade", "Steam pressure", "Spring-loaded blade"],
+        answer: "Gravity-driven blade"
+    },
+    {
+        question: "Although not its inventor, which French physician’s name is linked to the guillotine?",
+        options: ["Joseph-Ignace Guillotin", "Antoine Louis", "Jean-Paul Marat", "Georges Danton"],
+        answer: "Joseph-Ignace Guillotin"
+    },
+
+    // Concentration Camps
+    {
+        question: "Which country first developed the concept of concentration camps?",
+        options: ["Germany", "Spain", "Britain", "Italy"],
+        answer: "Britain"
+    },
+    {
+        question: "During which war were the first modern concentration camps established?",
+        options: ["World War I", "World War II", "Boer War", "Spanish Civil War"],
+        answer: "Boer War"
+    },
+    {
+        question: "What was the main purpose of Nazi concentration camps?",
+        options: ["Military training", "Forced labor and extermination", "Refugee shelter", "Medical research only"],
+        answer: "Forced labor and extermination"
+    },
+    {
+        question: "Who was the Nazi leader responsible for organizing the concentration camp system?",
+        options: ["Heinrich Himmler", "Adolf Hitler", "Joseph Goebbels", "Reinhard Heydrich"],
+        answer: "Heinrich Himmler"
+    },
+    {
+        question: "What was the largest Nazi concentration and extermination camp?",
+        options: ["Dachau", "Auschwitz-Birkenau", "Treblinka", "Buchenwald"],
+        answer: "Auschwitz-Birkenau"
+    },
+    {
+        question: "Which famous diarist died in a Nazi concentration camp?",
+        options: ["Anne Frank", "Simone de Beauvoir", "Hannah Arendt", "Greta Garbo"],
+        answer: "Anne Frank"
+    },
+    {
+        question: "In which year were Nazi concentration camps liberated by Allied forces?",
+        options: ["1943", "1944", "1945", "1946"],
+        answer: "1945"
+    },
+    {
+        question: "What were the 'death marches' during the Holocaust?",
+        options: ["Prisoners forced to march long distances as camps were evacuated", "Military parades celebrating victories", "Escape routes for survivors", "Transport of supplies"],
+        answer: "Prisoners forced to march long distances as camps were evacuated"
+    },
+
+    // Crucifix / Cross
+    {
+        question: "Which ancient civilization first used crucifixion as a method of execution?",
+        options: ["Romans", "Greeks", "Persians", "Egyptians"],
+        answer: "Persians"
+    },
+    {
+        question: "Who is the most famous person known to have been executed by crucifixion?",
+        options: ["Julius Caesar", "Jesus Christ", "Socrates", "Saint Peter"],
+        answer: "Jesus Christ"
+    }
+];
+
+        quizData.sort(() => Math.random() - 0.5);
+        quizData.splice(10);
 
         var quesIdx = 0;
 
