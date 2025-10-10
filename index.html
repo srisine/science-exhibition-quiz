@@ -12,15 +12,15 @@
         <h1>MODERNITY OF HISTORY</h1>
         <p>Prepare yourself…</p>
 
-        <video autoplay muted loop playsinline id="fire-video">
-            <source src="https://files.catbox.moe/xfw3yg.mp4" type="video/mp4">
-        </video>
-
+    <video autoplay muted loop playsinline id="fire-video">
+    <source src="fire.mp4" type="video/mp4">
+    </video>
     </div>
     <div class="quiz" style="display: none;">
         <div class="ques">
             <h1 id="qno"><u>QUESTION</u></h1>
             <h2 id="qnobody">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h2>
+            <h2 id="comm" style="color: red;"></h2>
         </div>
         <div class="options">
             <button id="option1" data-index="0">OPTION 1</button>
@@ -53,6 +53,7 @@
     var op2 = document.getElementById('option2');
     var op3 = document.getElementById('option3');
     var op4 = document.getElementById('option4');
+    var comm = document.getElementById('comm');
 
         var result = [0, 0, 0, 0, 0];
 
@@ -218,6 +219,18 @@ const quizData = [
                 qno.innerText = "Quiz Completed!";
                 quesBody.innerText = `Your score: ${result.reduce((a,b)=>a+b,0)}/${quizData.length}`;
 
+                if (result.reduce((a,b)=>a+b,0) < 6) {
+                    comm.innerText = "you are executed!";
+      
+                }
+                else if (result.reduce((a,b)=>a+b,0) < 8){
+                    comm.innerText = "Barely made it out!";
+
+                }
+                else if (result.reduce((a,b)=>a+b,0) < 10){
+                    comm.innerText = "you are safe!";
+                }
+
                 buttons.forEach(btn => btn.style.display = "none");
                 console.log("Quiz finished! Results:", result);
             }
@@ -227,6 +240,3 @@ const quizData = [
 
 </script>
 </html>
-
-
-
