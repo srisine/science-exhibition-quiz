@@ -219,7 +219,7 @@ const quizData = [
                 qno.innerText = "Quiz Completed!";
                 quesBody.innerText = `Your score: ${result.reduce((a,b)=>a+b,0)}/${quizData.length}`;
 
-                if (result.reduce((a,b)=>a+b,0) < 6) {
+                if (result.reduce((a,b)=>a+b,0) < 5) {
                     comm.innerText = "you are executed!";
       
                 }
@@ -240,3 +240,4 @@ const quizData = [
 
 </script>
 </html>
+
